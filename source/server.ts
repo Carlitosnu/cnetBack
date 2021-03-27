@@ -1,9 +1,9 @@
 import express, { Application } from "express"
 import {connect} from './database'
-import path from "path"
+import path from "path";
+import cors from "cors"
 import morgan from "morgan";
 import router from './router/router'
-import exhbs from 'express-handlebars'
 export class Servidor{
     app:Application;
     constructor(private port:String | Number ){
@@ -14,16 +14,11 @@ export class Servidor{
         this.router()
     }
     server_settings(){
+        this.app.use(cors({
+            origin:"*"
+        }))
         this.app.set("port", process.env.PORT || this.port)
         this.app.set("views", path.join(__dirname,"views"))
-        // VIEW ENGINE
-        this.app.set(".hbs",exhbs({ 
-            extname: ".hbs",
-            layoutsDir: path.join(this.app.get("views"),"layouts"),
-            partialsDir: path.join(this.app.get("views"),"partials"),
-            helpers: require("./lib/helpers/helper"),
-            defaultLayout: "index"
-        }))
         this.app.use(morgan("dev"))
         this.app.set("view engine",".hbs")
 
