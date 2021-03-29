@@ -1,6 +1,7 @@
 import {User} from "../interfaces/User";
 import mongoose,{Schema} from "mongoose"
 
+//Esto es lo que los usuarios tienen
 const UserSchema:Schema = new Schema({
     email: {
         type: String,
@@ -42,4 +43,5 @@ const UserSchema:Schema = new Schema({
         default:Date.now()
     }
 })
+// Enviamos esto a otros archivos
 export default mongoose.model<User>("User", UserSchema);

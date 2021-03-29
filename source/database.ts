@@ -7,7 +7,6 @@ export function connect(url:String){
         useUnifiedTopology:true,
 
     }).then(()=>{
-        console.log("DB is Connected");
-        
+        console.log("DB is Connected");       
     })
 }

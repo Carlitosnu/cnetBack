@@ -2,10 +2,9 @@ import Users from "../models/Users"
 import {User} from "../interfaces/User";
 import {Rango} from '../interfaces/User'
 export class UserController{
-    id?:String
-    constructor(id?:String){
-        this.id = id
-    }
+    /**
+     * Crea un usuario
+     */
     async createUser(UserInfo:User){
         let UserCreator = await new Users();
         let UserCreated = await Users.create(UserInfo);
@@ -14,9 +13,13 @@ export class UserController{
             "info": UserCreated
         }
     }
+    /**
+     * Busca al usuario en la base de datos retorna su id
+     * @returns {consult} user
+     */
     CheckUser(id:string){
         let Controller = new Users();
-        let user:Array<User> = Controller.findById(id);
+        let user = Controller.findById(id);
         if(user.length = 0){
             return {
                 state:false
@@ -24,7 +27,11 @@ export class UserController{
         }
         return {
             state:true,
-            userId: user.id;
+            userId: user.id
         }
     }
+}
+interface consult {
+    state:boolean
+    data: any
 }
