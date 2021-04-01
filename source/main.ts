@@ -1,4 +1,4 @@
 import {Servidor} from "./server"
 
 //Abrimos el servidor en el puerto
-const Application = new Servidor("5000");
+const Application = new Servidor();

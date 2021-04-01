@@ -28,7 +28,7 @@ export class Servidor{
         // Si existe un puerto lo setamos
         this.app.set("port", process.env.PORT || config.port)
         this.app.use(morgan(config.morgan))
-
+        this.app.use(express.json())
         // EXPRESS STATIC FILES
         this.app.use(express.static(path.join(__dirname,"public")))
     }

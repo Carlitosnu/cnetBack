@@ -12,8 +12,8 @@ export class UserController{
     async createUser(UserInfo:UserInterface){
         let UserCreated = await User.create(UserInfo)
         return {
-            "message": "User Create Succesfuly",
-            "info": UserCreated
+            message: true,
+            info: UserCreated
         }
     }
     /**
@@ -32,8 +32,8 @@ export class UserController{
             userId: user.id
         }
     }
-    async login(body:loginInterface){
-        let controller = await User.findOne({email:body.user,password:body.password});
+    async login(body:String){
+        let controller = await User.findOne({email:body});
         if(!controller){
             return {
                 state : false,
@@ -44,7 +44,8 @@ export class UserController{
             state : true,
             message: "Usuario encontrado",
             id: controller._id,
-            email: controller.email
+            email: controller.email,
+            pwd: controller.password
         }
     }
 }

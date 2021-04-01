@@ -7,18 +7,14 @@ export class JsonWebToken {
   private Key = "d780042543b5df978df33c6ab77e9d6f18d299c3";
   expires: number | string;
   constructor(private expiration?: number | string) {
-    this.expires = expiration || "24h";
+    this.expires = expiration || 86400000 ;
   }
-  async encode(input:string) {
-    try {
-      let encoded = await sign(input, this.Key, { expiresIn: this.expires });
+  async encode(input:string | String | Object) {
+      let encoded = await sign(input,this.Key,{expiresIn:this.expires});
       return { encoded };
-    } catch (err) {
-      return { err };
-    }
   }
   async decode(input:string) {
-      let tokenDecoded = await verify(input,this.Key);
+      let tokenDecoded:any = await verify(input,this.Key);
       let UsersController = new UserController()
       let exist = UsersController.CheckUser(tokenDecoded.id);
       return exist
